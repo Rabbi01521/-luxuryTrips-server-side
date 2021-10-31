@@ -76,7 +76,7 @@ async function run() {
     // DELETE ORDER API
     app.delete("/orders/:id", async (req, res) => {
       const id = req.params.id;
-      const query = { _id: id };
+      const query = { _id: ObjectId(id) };
       const result = await orderCollection.deleteOne(query);
       console.log("deleting Orders with id", result);
       res.json(result);
@@ -87,7 +87,7 @@ async function run() {
     app.put("/orders/:id", async (req, res) => {
       const id = req.params.id;
       const updateStatus = req.body;
-      const filter = { _id: id };
+      const filter = { _id: ObjectId(id) };
       const options = { upsert: true };
       const updateDoc = {
         $set: {
